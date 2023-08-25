@@ -94,7 +94,7 @@ public class Main { //главный класс. public - это значит, �
         static class Converter { //внутренний класс класса Calculator
             TreeMap<Character, Integer> romanKeyMap = new TreeMap<>();
             TreeMap<Integer, String> arabianKeyMap = new TreeMap<>();
-            public Converter() {
+            public Converter() { //конструктор
                 romanKeyMap.put('I', 1);
                 romanKeyMap.put('V', 5);
                 romanKeyMap.put('X', 10);
