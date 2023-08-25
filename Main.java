@@ -9,20 +9,24 @@ public class Main { //главный класс. public - это значит, �
                                             new - ключевое слово, для создания нового объекта класса.
                                             System.in - это стандартный ввод с клавиатуры*/
         System.out.print("Введите выражение: "); 
-        String exp = scn.nextLine(); /*exp - переменная для хранения считанной строки от юзера.
+        String exp = scn.nextLine(); /*exp - переменная для хранения считанных данных от юзера.
                                     scn.nextLine - для считывания следующей строки от юзера.
                                     знак Точка - для доступа к членам объекта или класса*/
-        try { //блок try-catch для обработки исключений (ошибок)
-            String result = calc(exp); 
+        try { /*блок try-catch для обработки исключений (профилактики ошибок).
+                В try находится код, в котором может находиться ошибка*/ 
+            String result = calc(exp); /*переменная result хранит результат работы калькулятора calc с аргументом exp.
+                                    знак () - внутри них то, с чем работает метод calc*/
             System.out.println(result);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+        } catch (IllegalArgumentException e) { /*catch обрабатывает исключение конкретного типа. IllegalArgumentException - тип исключения.
+                                            e - переменная, хранящая информацию об ошибке*/
+            System.out.println(e.getMessage()); //getMessage - метод для получения текстового описания ошибки из переменной e.
         }
     }
     
-    public static String calc(String input) {
+    
+    public static String calc(String input) { //метод calc обрабатывает входящее мат выражение input
         Calculator.Converter converter = new Calculator.Converter();
-        String[] actions = {"+", "-", "/", "*"};
+        String[] actions = {"+", "-", "/", "*"}; //массив допустимых мат операторов
         String[] regexActions = {"\\+", "-", "/", "\\*"};
         int actionIndex = -1;
         for (int i = 0; i < actions.length; i++) {
@@ -35,7 +39,7 @@ public class Main { //главный класс. public - это значит, �
             throw new IllegalArgumentException("Неверный формат выражения");
         }
         String[] data = input.split(regexActions[actionIndex]);
-        int a, b;
+        int a, b; //создание переменных для хранения операндов
         if (converter.isRoman(data[0]) && converter.isRoman(data[1])) {
             a = converter.romanToInt(data[0]);
             b = converter.romanToInt(data[1]);
@@ -57,8 +61,8 @@ public class Main { //главный класс. public - это значит, �
                 }
             }
         }
-        int result;
-        switch (actions[actionIndex]) {
+        int result; //объявление переменной для хранения результата
+        switch (actions[actionIndex]) { //блок switch-case
             case "+":
                 result = a + b;
                 break;
@@ -85,8 +89,9 @@ public class Main { //главный класс. public - это значит, �
         }
     }
     
+    
     static class Calculator { //внутренний класс класса Main. 
-        static class Converter {
+        static class Converter { //внутренний класс класса Calculator
             TreeMap<Character, Integer> romanKeyMap = new TreeMap<>();
             TreeMap<Integer, String> arabianKeyMap = new TreeMap<>();
             public Converter() {
@@ -97,6 +102,7 @@ public class Main { //главный класс. public - это значит, �
                 romanKeyMap.put('C', 100);
                 romanKeyMap.put('D', 500);
                 romanKeyMap.put('M', 1000);
+                
                 arabianKeyMap.put(1000, "M");
                 arabianKeyMap.put(900, "CM");
                 arabianKeyMap.put(500, "D");
