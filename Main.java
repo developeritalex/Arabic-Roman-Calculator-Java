@@ -123,7 +123,7 @@ public class Main { //главный класс. public - это значит, �
             public String intToRoman(int number) {
                 String roman = "";
                 int arabianKey;
-                do {
+                do { //блок цикла do-while
                     arabianKey = arabianKeyMap.floorKey(number);
                     roman += arabianKeyMap.get(arabianKey);
                     number -= arabianKey;
