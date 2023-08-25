@@ -143,7 +143,7 @@ public class Main { //главный класс. public - это значит, �
                         result += arabian;
                     }
                 }
-                return result;
+                return result; //возврат конечного результата
             }
         }
     }
